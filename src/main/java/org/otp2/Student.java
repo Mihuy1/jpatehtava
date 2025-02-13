@@ -1,11 +1,11 @@
 package org.otp2;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "Student")
 public class Student {
 
     @Id
@@ -14,6 +14,9 @@ public class Student {
 
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TimeSpent> timeSpent;
 
     public Student() {}
 
@@ -34,12 +37,20 @@ public class Student {
         return email;
     }
 
+    public List<TimeSpent> getTimeSpent() {
+        return timeSpent;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setTimeSpent(List<TimeSpent> timeSpent) {
+        this.timeSpent = timeSpent;
     }
 
     @Override

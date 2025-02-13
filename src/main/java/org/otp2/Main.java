@@ -1,18 +1,21 @@
 package org.otp2;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Student student1 = new Student();
         StudentDAO studentDAO = new StudentDAO();
+        TimeSpentDAO timeSpentDAO = new TimeSpentDAO();
 
-        student1.setName("Patrik");
-        student1.setEmail("patrik.doe@gmail.com");
+        // Create a new student
+        Student student = new Student("Patrik Hyytiainen", "patrikhy@metropolia.fi");
+        studentDAO.addStudent(student);
 
-        studentDAO.addStudent(student1);
+        // Create a time record for the student
+        TimeSpent timeSpent = new TimeSpent(3, 4, 2, student);
+        timeSpentDAO.addTimeSpent(timeSpent);
 
-
+        // Retrieve student and check their time spent records
+        Student retrievedStudent = studentDAO.findStudent(student);
+        System.out.println(retrievedStudent);
     }
 
 }

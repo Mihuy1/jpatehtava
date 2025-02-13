@@ -3,6 +3,7 @@ package org.otp2;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "TimeSpent")
 public class TimeSpent {
 
     @Id
